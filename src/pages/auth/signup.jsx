@@ -28,7 +28,7 @@ export const SignupPage = () => {
         onSubmit={e => e.preventDefault()}
         noValidate
         autoComplete="off"
-        className="container"
+        className="form-container"
       >
         <h1 className="mb-4 text-4xl  leading-none tracking-tight text-gray-900 md:text-5xl lg:text-5xl dark:text-white">
           <span className="text-blue-600 dark:text-blue-500 font-extrabold">
@@ -41,17 +41,20 @@ export const SignupPage = () => {
         <h4 className="mb-4 text-3xl  leading-none tracking-tight text-gray-500 md:text-2xl lg:text-xl dark:text-white">
           Give us few details to get started
         </h4>
-        {success && (
-          <p className="message-text font-semibold p-1 px-2 text-sm rounded-md bg-green-200 text-green-500 mb-5 flex items-center gap-2">
-            <BsFillCheckSquareFill /> Form has been submitted successfully
-          </p>
-        )}
-        <div className="flex flex-col mt-5">
+        {/*{success && (*/}
+        {/*  <p className="message-text font-semibold p-1 px-2 text-sm rounded-md bg-green-200 text-green-500 mb-5 flex items-center gap-2">*/}
+        {/*    <BsFillCheckSquareFill /> Form has been submitted successfully*/}
+        {/*  </p>*/}
+        {/*)}*/}
+        <div className="flex flex-col mt-8">
           <div className="flex justify-between">
             <Input {...firstNameValidation} />
             <Input {...lastNameValidation} />
           </div>
-          <Input {...emailValidation} />
+          <div className="flex justify-between">
+            <Input {...emailValidation} />
+            <></>
+          </div>
           <div className="flex justify-between">
             <Input {...passwordValidation} />
             <Input {...confirmPasswordValidation} />

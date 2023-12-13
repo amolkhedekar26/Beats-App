@@ -18,28 +18,29 @@ export const Input = ({
     register,
     formState: { errors },
     watch,
+    getValues
   } = useFormContext()
 
   const inputErrors = findInputError(errors, name)
   const isInvalid = isFormInvalid(inputErrors)
 
   const input_tailwind =
-    'p-3 font-medium rounded-full w-fit border border-2 border-slate-300 focus:outline-none focus:border-slate-500 placeholder:opacity-60'
+    'p-3 font-medium rounded-full border border-2 border-slate-300 focus:outline-none focus:border-slate-500 placeholder:opacity-60'
 
   return (
-    <div className={cn('flex flex-col w-fit gap-2 mb-2', className)}>
+    <div className={cn('flex flex-col gap-2 mb-2 input-div', className)}>
       <div className="flex justify-between">
         <label htmlFor={id} className="font-semibold capitalize text-gray-800">
           {label}
         </label>
-        <AnimatePresence mode="wa addressit" initial={false}>
-          {isInvalid && (
-            <InputError
-              message={inputErrors.error.message}
-              key={inputErrors.error.message}
-            />
-          )}
-        </AnimatePresence>
+        {/*<AnimatePresence mode="wa addressit" initial={false}>*/}
+        {/*  {isInvalid && (*/}
+        {/*    <InputError*/}
+        {/*      message={inputErrors.error.message}*/}
+        {/*      key={inputErrors.error.message}*/}
+        {/*    />*/}
+        {/*  )}*/}
+        {/*</AnimatePresence>*/}
       </div>
       {multiline ? (
         <textarea
@@ -63,9 +64,10 @@ export const Input = ({
           className={cn(input_tailwind)}
           placeholder={placeholder}
           {...register(name, {
-            required: true,
+            required: "Required",
             validate: value =>
-              value === watch('password') || 'Passwords do not match',
+              value === watch('password') || 'Password do not match',
+
           })}
         />
       ) : (
@@ -77,6 +79,14 @@ export const Input = ({
           {...register(name, validation)}
         />
       )}
+
+      <AnimatePresence mode="wa addressit" initial={false}>
+
+        <InputError
+          message={inputErrors.error?inputErrors.error.message:null}
+          // key={inputErrors.error.message}
+        />
+      </AnimatePresence>
     </div>
   )
 }
@@ -84,18 +94,18 @@ export const Input = ({
 const InputError = ({ message }) => {
   return (
     <motion.p
-      className="flex items-center gap-1 px-2 font-semibold text-sm text-red-500 bg-red-100 rounded-full"
+      className="flex items-center gap-1 px-2 font-semibold text-sm text-red-500"
       {...framer_error}
     >
-      <MdError />
+      {message == null?null:(<MdError />)}
       {message}
     </motion.p>
   )
 }
 
 const framer_error = {
-  initial: { opacity: 0, y: 10 },
+  initial: { opacity: 0, x: 5 },
   animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: 10 },
+  exit: { opacity: 0, x: 10 },
   transition: { duration: 0.2 },
 }

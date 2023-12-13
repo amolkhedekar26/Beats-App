@@ -60,7 +60,7 @@ export const LoginPage = props => {
         {/*    <BsFillCheckSquareFill /> Invalid Email or Password.*/}
         {/*  </p>*/}
         {/*)}*/}
-        <div className='flex flex-col mt-5'>
+        <div className='flex flex-col mt-8'>
           <Input {...emailValidation}  />
           <Input {...passwordValidation} />
         </div>

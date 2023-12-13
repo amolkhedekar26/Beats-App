@@ -1,6 +1,7 @@
 import { postRequest } from '../../axios/axiosClient'
 import { LOGIN_SUCCESS, LOGIN_FAIL } from './ActionTypes'
-import {toast} from "react-toastify"
+// import {toast} from "react-toastify"
+import toast from 'react-hot-toast';
 export const login = (email, password) => async dispatch => {
   // try {
   //   const result = await postRequest('login', { email, password })
@@ -12,19 +13,43 @@ export const login = (email, password) => async dispatch => {
   // } catch (err) {
   //   console.log(err)
   // }
+
+  toast.promise(postRequest('login', { email, password }), {
+    loading: 'Please wait...',
+    success: (res)=> res.data.message.details,
+    error: (err)=> err.response.data.message.details,
+  },{
+    style: {
+      minWidth: 'fit-content',
+      display:'flex'
+    },
+    success: {
+      duration: 51555000,
+    },
+    error:{
+      duration:51555000
+    }
+  });
+
+/*
   postRequest('login', { email, password }).then(res => {
     console.log(res.data)
     dispatch({
       type: LOGIN_SUCCESS,
       payload: { user: res },
     })
-    toaster.success()
-  }).catch((error) => {
-    if (error.response) {
-      console.log(error.response.data) // => the response payload
+    // toaster.success(res.data.message.details)
+
+
+  }).catch((err) => {
+    if (err.response) {
+      console.log(err.response.data) // => the response payload
     }
-    toaster.error()
-  })
+    // toaster.error(err.response.data.message.details)
+  }) */
+
+
+
   //   return AuthService.login(username, password).then(
   //     data => {
   //       dispatch({
@@ -51,16 +76,21 @@ export const login = (email, password) => async dispatch => {
 }
 
 const toaster = {
-  success: function() {
-    toast.success("Login successfull", {
+  success: function(msg) {
+    toast.success(msg, {
       position: toast.POSITION.TOP_RIGHT,
       className:"toast-msg toast-success",
+      type:"success",
+      theme:"light"
+
     });
   },
-  error: function() {
-    toast.error("Invalid email or password", {
+  error: function(msg) {
+    toast.error(msg, {
       position: toast.POSITION.TOP_RIGHT,
-      className:"toast-msg toast-error"
+      className:"toast-msg toast-error",
+      type:"error",
+      theme:"light"
     });
   }
 };
