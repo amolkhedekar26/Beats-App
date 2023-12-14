@@ -10,12 +10,11 @@ import { BsFillCheckSquareFill } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../../redux/actions/auth.action'
-import { checkAuthSuccessful } from '../../redux/reducers/auth.reducer.js'
+import { getState } from '../../redux/reducers/auth.reducer.js'
 
-import {toast} from "react-toastify"
 export const LoginPage = props => {
   const methods = useForm()
-  const loginSuccess = useSelector(checkAuthSuccessful).authReducer.isSuccessfull
+  const loginSuccess = useSelector(getState).authReducer.isSuccessfull
 
   useEffect(() => {
     let defaultValues = {};

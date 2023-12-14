@@ -10,9 +10,13 @@ import {
 import { LoginPage } from '../pages/auth/login'
 import { SignupPage } from '../pages/auth/signup'
 import { HomePage } from '../pages/home/home'
+import { useSelector } from 'react-redux'
+import { getState } from '../redux/reducers/auth.reducer.js'
 
 const Driver = () => {
-  const [token, setToken] = useState('s')
+  const state = useSelector(getState)
+  console.log(state)
+  const token = state.authReducer.isLoggedIn
   const navigate = useNavigate()
   // useEffect(() => {
   //   if (!token) {

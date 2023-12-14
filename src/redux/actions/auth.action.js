@@ -2,6 +2,7 @@ import { postRequest } from '../../axios/axiosClient'
 import { LOGIN_SUCCESS, LOGIN_FAIL } from './ActionTypes'
 // import {toast} from "react-toastify"
 import toast from 'react-hot-toast';
+import {getFromLS, setToLS} from '../../utils'
 export const login = (email, password) => async dispatch => {
   // try {
   //   const result = await postRequest('login', { email, password })
@@ -16,7 +17,14 @@ export const login = (email, password) => async dispatch => {
 
   toast.promise(postRequest('login', { email, password }), {
     loading: 'Please wait...',
-    success: (res)=> res.data.message.details,
+    success: (res)=> {
+      setToLS('user', JSON.stringify(res.data.data))
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: { user: res.data.data },
+      })
+      return res.data.message.details
+    },
     error: (err)=> err.response.data.message.details,
   },{
     style: {
@@ -24,10 +32,10 @@ export const login = (email, password) => async dispatch => {
       display:'flex'
     },
     success: {
-      duration: 51555000,
+      duration: 5000,
     },
     error:{
-      duration:51555000
+      duration:5000
     }
   });
 
@@ -42,6 +50,11 @@ export const login = (email, password) => async dispatch => {
 
 
   }).catch((err) => {
+    if (err.code === 'ECONNABORTED') {
+      console.log('Request timed out');
+    } else {
+      console.log(err.message);
+    }
     if (err.response) {
       console.log(err.response.data) // => the response payload
     }

@@ -1,6 +1,7 @@
 import { LOGIN_SUCCESS, LOGIN_FAIL } from '../actions/ActionTypes'
+import { getFromLS } from '../../utils/index.js'
 
-const user = JSON.parse(localStorage.getItem('user'))
+const user = getFromLS('user')
 
 const initialState = user
   ? { isLoggedIn: true, user, isSuccessfull: true }
@@ -29,4 +30,4 @@ export default function authReducer(state = initialState, action) {
   }
 }
 
-export const checkAuthSuccessful = (state) => state
+export const getState = (state) => state
