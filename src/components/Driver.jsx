@@ -10,6 +10,7 @@ import { SignupPage } from '../pages/auth/signup'
 import { HomePage } from '../pages/home/home'
 import { useSelector } from 'react-redux'
 import { getState } from '../redux/reducers/auth.reducer.js'
+import PrivateRoutes from './PrivateRoutes.jsx'
 
 const Driver = () => {
   const state = useSelector(getState)
@@ -18,11 +19,15 @@ const Driver = () => {
   return (
     <>
       <Routes>
-        <Route
-          path="*"
-          element={!loggedIn ? <Navigate to="/login" /> : <HomePage />}
-        />
-        <Route path="/home/*" element={<MasterLayout />} />
+        {/*<Route*/}
+        {/*  path="*"*/}
+        {/*  element={!loggedIn ? <Navigate to="/login" /> : <HomePage />}*/}
+        {/*/>*/}
+        <Route element={<PrivateRoutes />}>
+          <Route path="*" element={<HomePage />} />
+        </Route>
+        {/*<Route path="*" element={<HomePage />} />*/}
+        {/*<Route path="/home/*" element={<MasterLayout />} />*/}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
       </Routes>

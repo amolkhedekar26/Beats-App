@@ -14,9 +14,9 @@ import { SignupPage } from '../auth/signup'
 export const HomePage = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  // useEffect(() => {
-  //   navigate('/home')
-  // }, [])
+  useEffect(() => {
+    // navigate('/dashboard')
+  }, [])
   return (
     <>
       <MasterLayout></MasterLayout>

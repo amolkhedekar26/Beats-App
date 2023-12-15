@@ -19,7 +19,7 @@ export const LoginPage = props => {
   useEffect(() => {
     if (loggedIn) {
       // navigate('/home/*')
-      navigate(-1)
+      navigate('/')
     }
   }, [loggedIn])
 
@@ -33,7 +33,7 @@ export const LoginPage = props => {
 
 
   const dispatch = useDispatch()
-  const onSubmit = methods.handleSubmit(data => {
+  const doLogin = methods.handleSubmit(data => {
     console.log(data)
     dispatch(login(data.email, data.password))
     methods.reset()
@@ -72,7 +72,7 @@ export const LoginPage = props => {
           </p>
 
           <button
-            onClick={onSubmit}
+            onClick={doLogin}
             className='p-3 ml-4 px-12 rounded-full bg-blue-600 font-semibold text-white flex  gap-1 hover:bg-blue-800'
           >
             Login

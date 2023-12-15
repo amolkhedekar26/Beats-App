@@ -3,14 +3,17 @@ import { IoMdLogOut } from 'react-icons/io'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import Logo from '../assets/exam-logo.svg'
 import { logout } from '../redux/actions/auth.action.jsx'
+import { useNavigate } from 'react-router-dom'
 
 const getHeading = state => state
 
 export const Navigation = () => {
   const data = useSelector(getHeading, shallowEqual)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const logoutHandler = () => {
     dispatch(logout())
+    navigate('/login')
   }
 
   useEffect(() => {
