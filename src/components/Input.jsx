@@ -5,20 +5,20 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { MdError } from 'react-icons/md'
 
 export const Input = ({
-  name,
-  label,
-  type,
-  id,
-  placeholder,
-  validation,
-  multiline,
-  className,
-}) => {
+                        name,
+                        label,
+                        type,
+                        id,
+                        placeholder,
+                        validation,
+                        multiline,
+                        className,
+                      }) => {
   const {
     register,
     formState: { errors },
     watch,
-    getValues
+    getValues,
   } = useFormContext()
 
   const inputErrors = findInputError(errors, name)
@@ -29,18 +29,10 @@ export const Input = ({
 
   return (
     <div className={cn('flex flex-col gap-2 mb-2 input-div', className)}>
-      <div className="flex justify-between">
-        <label htmlFor={id} className="font-semibold capitalize text-gray-800">
+      <div className='flex justify-between'>
+        <label htmlFor={id} className='font-semibold capitalize text-gray-800'>
           {label}
         </label>
-        {/*<AnimatePresence mode="wa addressit" initial={false}>*/}
-        {/*  {isInvalid && (*/}
-        {/*    <InputError*/}
-        {/*      message={inputErrors.error.message}*/}
-        {/*      key={inputErrors.error.message}*/}
-        {/*    />*/}
-        {/*  )}*/}
-        {/*</AnimatePresence>*/}
       </div>
       {multiline ? (
         <textarea
@@ -50,21 +42,14 @@ export const Input = ({
           placeholder={placeholder}
           {...register(name, validation)}
         ></textarea>
-      ) : // <input
-      //   id={id}
-      //   type={type}
-      //   className={cn(input_tailwind)}
-      //   placeholder={placeholder}
-      //   {...register(name, validation)}
-      // />
-      id == 'confirmPassword' ? (
+      ) : id === 'confirmPassword' ? (
         <input
           id={id}
           type={type}
           className={cn(input_tailwind)}
           placeholder={placeholder}
           {...register(name, {
-            required: "Required",
+            required: 'Required',
             validate: value =>
               value === watch('password') || 'Password do not match',
 
@@ -80,11 +65,10 @@ export const Input = ({
         />
       )}
 
-      <AnimatePresence mode="wa addressit" initial={false}>
+      <AnimatePresence mode='wa addressit' initial={false}>
 
         <InputError
-          message={inputErrors.error?inputErrors.error.message:null}
-          // key={inputErrors.error.message}
+          message={inputErrors.error ? inputErrors.error.message : null}
         />
       </AnimatePresence>
     </div>
@@ -94,10 +78,10 @@ export const Input = ({
 const InputError = ({ message }) => {
   return (
     <motion.p
-      className="flex items-center gap-1 px-2 font-semibold text-sm text-red-500"
+      className='flex items-center gap-1 px-2 font-semibold text-sm text-red-500'
       {...framer_error}
     >
-      {message == null?null:(<MdError />)}
+      {message == null ? null : (<MdError />)}
       {message}
     </motion.p>
   )

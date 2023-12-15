@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGIN_FAIL } from '../actions/ActionTypes'
+import { LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from '../actions/ActionTypes'
 import { getFromLS } from '../../utils/index.js'
 
 const user = getFromLS('user')
@@ -19,6 +19,13 @@ export default function authReducer(state = initialState, action) {
         isSuccessfull: true,
       }
     case LOGIN_FAIL:
+      return {
+        ...state,
+        isLoggedIn: false,
+        user: null,
+        isSuccessfull: false,
+      }
+    case LOGOUT:
       return {
         ...state,
         isLoggedIn: false,

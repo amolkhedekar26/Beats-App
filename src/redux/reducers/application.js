@@ -1,28 +1,8 @@
-// import { SET_PAGE_HEADING } from '../constants/ActionTypes'
-
 import {
   GET_PAGE_HEADING,
   GET_TODOS,
   SET_PAGE_HEADING,
 } from '../actions/ActionTypes'
-
-// const initialState = {
-//   pageHeading: null,
-// }
-
-// export const getPageHeading = (state = initialState.pageHeading, action) => {
-//   switch (action.type) {
-//     case SET_PAGE_HEADING:
-//       if (state == null) {
-//         return 'Beats'
-//       }
-//       return action.pageHeading
-//     default:
-//       return 'Beats'
-//   }
-// }
-
-// export const applyPageHeading = state => state.pageHeading
 
 const initialState = { pageHeading: 'Beats', todos: [] }
 
